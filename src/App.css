@@ -1,10 +1,102 @@
 .App {
   text-align: center;
+  width: 70%;
+  min-width: 800px;
+  max-width: 1200px;
+  margin: auto;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid gray;
+}
+
+.nav>p {
+  margin: 15px;
+}
+
+.post-box {
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 0px solid ;
+  border-radius: 5px;
+  background-color: lightgray;
+}
+
+.input-box {
+  margin: 15px;
+}
+.post-box>button {
+  height: 30px;
+  width: 100px;
+  margin-right: 25px;
+}
+
+.post-box-layout{
+  display: flex;
+}
+
+.posted-box {
+  width: 250px;
+  height: 170px;
+  margin-right: 10px;
+  padding: 0 20px;
+  border: 3px solid green;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.post-box>button {
+  border: 0 solid red;
+  border-radius: 5px;
+  background-color: green;
+  color: white;
+}
+
+.constent {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.btn {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.delete-btn {
+  width: 115px;
+  height: 40px;
+  border: 2px solid red;
+  border-radius: 5px;
+  background-color: transparent;
+}
+
+.done-btn {
+  width: 115px;
+  height: 40px;
+  border: 2px solid green;
+  border-radius: 5px;
+  background-color: transparent;
+}
+
+.how {
+  text-align: start;
+  width: 100%;
+  font-weight: bold;
 }
 
 @media (prefers-reduced-motion: no-preference) {
