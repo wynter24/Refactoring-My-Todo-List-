@@ -1,9 +1,8 @@
 .App {
   text-align: center;
-  width: 70%;
   min-width: 800px;
   max-width: 1200px;
-  margin: auto;
+  margin: 0 auto;
 }
 
 .App-logo {
@@ -40,8 +39,13 @@
   margin-right: 25px;
 }
 
+main {
+  padding: 0 24px;
+}
+
 .post-box-layout{
   display: flex;
+  flex-wrap: wrap;
 }
 
 .posted-box {
@@ -81,7 +85,7 @@
   width: 115px;
   height: 40px;
   border: 2px solid red;
-  border-radius: 5px;
+  border-radius: 8px;
   background-color: transparent;
 }
 
@@ -89,7 +93,7 @@
   width: 115px;
   height: 40px;
   border: 2px solid green;
-  border-radius: 5px;
+  border-radius: 8px;
   background-color: transparent;
 }
 
