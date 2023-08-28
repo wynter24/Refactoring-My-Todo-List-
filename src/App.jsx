@@ -45,8 +45,8 @@ function App() {
       isDone: false,
     };
     setWorkingPost([...workingPosts, newPost]);
-    setTitle('');
-    setContent('');
+    setTitle("");
+    setContent("");
   };
 
   // working 게시글 삭제
@@ -78,7 +78,7 @@ function App() {
       (post) => post.isDone === false
     );
     setWorkingPost(workingDonePost);
-    // alert(isDone)
+    alert(id);
   };
 
   // (done zone) 취소 버튼 눌렀을 때 working 존으로 다시 back
@@ -88,7 +88,7 @@ function App() {
     }
     // 취소 버튼 누른 post를 working에 추가
     const notDonePost = {
-      id: id,
+      id: workingPosts.length + 1,
       title,
       body,
       isDone: false,
@@ -97,6 +97,7 @@ function App() {
     // working에서 없어짐
     const notYetPost = donePosts.filter((post) => post.isDone === true);
     setDonePost(notYetPost);
+    alert(id);
   };
 
   return (
@@ -122,26 +123,12 @@ function App() {
         <div className="post-box-layout">
           {workingPosts.map(function (item) {
             return (
-              <div className="posted-box">
-                <div className="constent">
-                  <p>{item.title}</p>
-                  <p>{item.body}</p>
-                </div>
-                <div key={item.id} className="btn">
-                  <button
-                    onClick={() => RemoveWorkingdButton(item.id)}
-                    className="delete-btn">
-                    삭제하기
-                  </button>
-                  <button
-                    onClick={() =>
-                      WorkingDone(item.id, item.title, item.body, item)
-                    }
-                    className="done-btn">
-                    완료
-                  </button>
-                </div>
-              </div>
+              <WorkingPoster
+                key={item.id}
+                item={item}
+                RemoveWorkingdButton={RemoveWorkingdButton}
+                WorkingDone={WorkingDone}
+              />
             );
           })}
         </div>
@@ -151,24 +138,12 @@ function App() {
         <div className="post-box-layout">
           {donePosts.map(function (item) {
             return (
-              <div className="posted-box">
-                <div className="constent">
-                  <p>{item.title}</p>
-                  <p>{item.body}</p>
-                </div>
-                <div key={item.id} className="btn">
-                  <button
-                    onClick={() => RemoveDoneButton(item.id)}
-                    className="delete-btn">
-                    삭제하기
-                  </button>
-                  <button
-                    onClick={() => NotYet(item.id, item.title, item.body, item)}
-                    className="done-btn">
-                    취소
-                  </button>
-                </div>
-              </div>
+              <DonePoster 
+                key={item.id}
+                item={item}
+                RemoveDoneButton={RemoveDoneButton}
+                NotYet={NotYet}
+              />
             );
           })}
         </div>
@@ -177,7 +152,54 @@ function App() {
   );
 }
 
+const WorkingPoster = ({ item, RemoveWorkingdButton, WorkingDone }) => {
+  return (
+    <div className="posted-box">
+      <div className="constent">
+        <p>{item.title}</p>
+        <p>{item.body}</p>
+      </div>
+      <div key={item.id} className="btn">
+        <button
+          onClick={() => RemoveWorkingdButton(item.id)}
+          className="delete-btn"
+        >
+          삭제하기
+        </button>
+        <button
+          onClick={() => WorkingDone(item.id, item.title, item.body, item)}
+          className="done-btn"
+        >
+          완료
+        </button>
+      </div>
+    </div>
+  );
+};
 
-
+const DonePoster = ({item, RemoveDoneButton,NotYet}) => {
+  return (
+    <div className="posted-box">
+      <div className="constent">
+        <p>{item.title}</p>
+        <p>{item.body}</p>
+      </div>
+      <div key={item.id} className="btn">
+        <button
+          onClick={() => RemoveDoneButton(item.id)}
+          className="delete-btn"
+        >
+          삭제하기
+        </button>
+        <button
+          onClick={() => NotYet(item.id, item.title, item.body, item)}
+          className="done-btn"
+        >
+          취소
+        </button>
+      </div>
+    </div>
+  );
+};
 
 export default App;
