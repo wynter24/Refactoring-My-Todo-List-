@@ -78,7 +78,7 @@ function App() {
       (post) => post.isDone === false
     );
     setWorkingPost(workingDonePost);
-    alert(id);
+    // alert(id);
   };
 
   // (done zone) 취소 버튼 눌렀을 때 working 존으로 다시 back
@@ -97,7 +97,7 @@ function App() {
     // working에서 없어짐
     const notYetPost = donePosts.filter((post) => post.isDone === true);
     setDonePost(notYetPost);
-    alert(id);
+    // alert(id);
   };
 
   return (
@@ -156,6 +156,7 @@ const WorkingPoster = ({ item, RemoveWorkingdButton, WorkingDone }) => {
   return (
     <div className="posted-box">
       <div className="constent">
+        <button>상세보기</button>
         <p>{item.title}</p>
         <p>{item.body}</p>
       </div>
@@ -181,6 +182,7 @@ const DonePoster = ({item, RemoveDoneButton,NotYet}) => {
   return (
     <div className="posted-box">
       <div className="constent">
+      <button>상세보기</button>
         <p>{item.title}</p>
         <p>{item.body}</p>
       </div>
