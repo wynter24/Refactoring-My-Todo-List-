@@ -1,33 +1,21 @@
-const DonePoster = ({
-  item,
-  donePosts,
-  setDonePost,
-  workingPosts,
-  setWorkingPost,
-}) => {
-  // done 게시글 삭제
-  const RemoveDoneButton = (id) => {
-    const newDonePost = donePosts.filter((post) => post.id !== id);
-    setDonePost(newDonePost);
-  };
+import RemoveButton from "./RemoveButton";
 
+const DonePoster = ({ item, posts, setPosts }) => {
   // (done zone) 취소 버튼 눌렀을 때 working 존으로 다시 back
-  const NotYet = (id, title, body, item) => {
-    if (item.id === id) {
-      item.isDone = false;
-    }
-    // 취소 버튼 누른 post를 working에 추가
-    const notDonePost = {
-      id: workingPosts.length + 1,
-      title,
-      body,
-      isDone: false,
-    };
-    setWorkingPost([...workingPosts, notDonePost]);
-    // working에서 없어짐
-    const notYetPost = donePosts.filter((post) => post.isDone === true);
-    setDonePost(notYetPost);
-    // alert(id);
+  const NotYet = (id) => {
+    const notDonePost = posts.map((post) => {
+      if (post.id === id) {
+        return {
+          id,
+          title: post.title,
+          content: post.content,
+          isDone: false,
+        };
+      } else {
+        return post;
+      }
+    });
+    setPosts(notDonePost);
   };
 
   return (
@@ -35,19 +23,11 @@ const DonePoster = ({
       <div className="constent">
         <button>상세보기</button>
         <p>{item.title}</p>
-        <p>{item.body}</p>
+        <p>{item.content}</p>
       </div>
       <div key={item.id} className="btn">
-        <button
-          onClick={() => RemoveDoneButton(item.id)}
-          className="delete-btn"
-        >
-          삭제하기
-        </button>
-        <button
-          onClick={() => NotYet(item.id, item.title, item.body, item)}
-          className="done-btn"
-        >
+        <RemoveButton posts={posts} setPosts={setPosts} item={item} />
+        <button onClick={() => NotYet(item.id)} className="done-btn">
           취소
         </button>
       </div>

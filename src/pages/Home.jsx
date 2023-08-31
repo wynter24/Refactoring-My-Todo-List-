@@ -1,27 +1,17 @@
-import React from 'react'
+import React from "react";
 import { useState } from "react";
 import "../App.css";
-import WorkingPoster from '../components/WorkingPoster';
-import DonePoster from '../components/DonePoster';
+import WorkingPoster from "../components/WorkingPoster";
+import DonePoster from "../components/DonePoster";
 
 function Home() {
-  // working에 저장되는 post 데이터
-  const [workingPosts, setWorkingPost] = useState([
+  // working, done에 저장되는 post 데이터
+  const [posts, setPosts] = useState([
     {
       id: 1,
       title: "리액트 공부하기",
-      body: "리액트 기초를 공부해봅시다.",
+      content: "리액트 기초를 공부해봅시다.",
       isDone: false,
-    },
-  ]);
-
-  // done에 저장되는 post 데이터
-  const [donePosts, setDonePost] = useState([
-    {
-      id: 1,
-      title: "리액트 공부하기",
-      body: "리액트 기초를 공부해봅시다.",
-      isDone: true,
     },
   ]);
 
@@ -42,14 +32,15 @@ function Home() {
   // 게시글 추가
   const onSubmitHandler = () => {
     const newPost = {
-      id: workingPosts.length + 1,
+      id: posts.length===0 ? 1 : posts[posts.length-1].id + 1,
       title,
-      body: content,
+      content,
       isDone: false,
     };
-    setWorkingPost([...workingPosts, newPost]);
+    setPosts([...posts, newPost]);
     setTitle("");
     setContent("");
+    console.log(newPost);
   };
 
   return (
@@ -67,39 +58,43 @@ function Home() {
         {/* post한 workign 게시물 */}
         <p className="how">Working..🔥</p>
         <div className="post-box-layout">
-          {workingPosts.map(function (item) {
-            return (
-              <WorkingPoster
-                key={item.id}
-                workingPosts={workingPosts}
-                setWorkingPost={setWorkingPost}
-                item={item}
-                donePosts={donePosts}
-                setDonePost={setDonePost}
-              />
-            );
-          })}
+          {posts
+            .filter((item) => {
+              return item.isDone === false;
+            })
+            .map(function (item) {
+              return (
+                <WorkingPoster
+                  key={item.id}
+                  posts={posts}
+                  setPosts={setPosts}
+                  item={item}
+                />
+              );
+            })}
         </div>
 
         {/* post한 done 게시물 */}
         <p className="how">Done..!🎉</p>
         <div className="post-box-layout">
-          {donePosts.map(function (item) {
-            return (
-              <DonePoster
-                key={item.id}
-                item={item}
-                donePosts={donePosts}
-                setDonePost={setDonePost}
-                workingPosts={workingPosts}
-                setWorkingPost={setWorkingPost}
-              />
-            );
-          })}
+          {posts
+            .filter((item) => {
+              return item.isDone === true;
+            })
+            .map(function (item) {
+              return (
+                <DonePoster
+                  key={item.id}
+                  item={item}
+                  posts={posts}
+                  setPosts={setPosts}
+                />
+              );
+            })}
         </div>
       </main>
     </div>
   );
 }
 
-export default Home
+export default Home;
