@@ -28,4 +28,4 @@ id에 1을 할당하였다.
 - RemoveButton
 
 ---
-~~Redux 적용과 detail 페이지 추가는 React-Lv2-My-To-Do-List에서 확인 바람 ~~ 
+~~Redux 적용과 detail 페이지 추가는 React-Lv2-My-To-Do-List에서 확인 바람~~ 
